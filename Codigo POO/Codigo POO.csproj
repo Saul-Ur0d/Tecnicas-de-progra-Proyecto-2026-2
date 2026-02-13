@@ -8,4 +8,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="CodigoPersona.cs" />
+    <Compile Remove="CodigoRectangulo.cs" />
+    <Compile Remove="ObjetoRectangulo.cs" />
+    <Compile Remove="Persona.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="CodigoPersona.cs" />
+    <None Include="CodigoRectangulo.cs" />
+    <None Include="ObjetoRectangulo.cs" />
+    <None Include="Persona.cs" />
+  </ItemGroup>
+
 </Project>
