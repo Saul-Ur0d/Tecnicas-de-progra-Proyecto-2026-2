@@ -56,9 +56,9 @@ if (sel == 1)
     Console.WriteLine("2- Resta");
     Console.WriteLine("3- Multiplicacion");
     Console.WriteLine("4- Division");
-    int sel = int.Parse(Console.ReadLine() ?? ""); 
+    int sel2 = int.Parse(Console.ReadLine() ?? ""); 
 
-    switch (sel)
+    switch (sel2)
     {
         case 1:
             Console.WriteLine($"El resultado calc basica: {calculadora.Suma()}");
@@ -87,9 +87,9 @@ if (sel == 2)
     Console.WriteLine("5- Logaritmo");
     Console.WriteLine("6- Raiz cuadrada");
     Console.WriteLine("7- Factorial");
-    int sel = int.Parse(Console.ReadLine() ?? "");
+    int sel2 = int.Parse(Console.ReadLine() ?? "");
 
-    switch (sel)
+    switch (sel2)
     {
         case 1:
             Console.WriteLine($"El resultado calc cientifica: {calculadoraCientifica.Suma()}");
