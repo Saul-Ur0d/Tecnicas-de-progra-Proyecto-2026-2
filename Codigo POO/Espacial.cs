@@ -8,8 +8,6 @@ try
     while (Funcionando)
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine("Bienvenido");
-        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine("¿Que desea realizar");
         Console.WriteLine("1- Agregar un suministro");
         Console.WriteLine("2- Buscar un suministro");
@@ -17,7 +15,7 @@ try
         Console.WriteLine("4- Ordenar los suministros");
         Console.WriteLine("5- Revertir el orden");
         Console.WriteLine("6- Vaciar el inventario");
-        Console.WriteLine("7- Mostrar inventario");
+        Console.WriteLine("7- Mostrar inventario"); //El try-catch del inventario vacio lo puse hasta el metodo Mostrar_Suiministros()
         Console.WriteLine("8- Terminar el programa");
 
 
@@ -26,26 +24,65 @@ try
         switch (Decision)
         {
             case 1:
-                Console.WriteLine("Que deseas agregar?");
-                string nuevo = Console.ReadLine() ?? "";
-                Console.WriteLine("Cuantos deseas agregar?");
-                int cant = int.Parse(Console.ReadLine() ?? "");
-                Console.WriteLine("Que prioridad tiene? ");
-                int prio = int.Parse(Console.ReadLine() ?? "");
-                if (nuevo != "")
+                try
                 {
-                    if (cant > 0 || (prio >= 0 && prio <= 3))
+                    Console.WriteLine("Que deseas agregar?");
+                    string nuevo = Console.ReadLine() ?? "";
+
+                    /* 
+                    No me gustaba que el codigo terminara incluso si el catch evitaba que le lanzara
+                    excepcion de formato al usuario, y recorde que en la pagina de learn c# in y minutes
+                    habia visto un comando booleano para ver si se lograba convertir a entero, investigue
+                    un poco mas y decidi incluir el tryparse al codigo, se ve un poco sobrecargado de ifs
+                    y aparte tuve que ponerle otro try pero funciona :D
+                    */
+
+                    Console.WriteLine("Cuantos deseas agregar?");
+                    string Can = Console.ReadLine() ?? "";
+                    int cant;
+                    if (int.TryParse(Can, out cant))
                     {
-                        inventario.AgregarSuministro(nuevo, cant, prio);
+                        Console.WriteLine("Que prioridad tiene? ");
+                        string pri = Console.ReadLine() ?? "";
+                        int prio;
+                        if (int.TryParse(pri, out prio))
+                        {
+                            if (nuevo != "")
+                            /* 
+                            Este ultimo if deberia ser el que contenga todos los demas
+                            pero es el que ya tenia hecho antes de meter los if de throw,
+                            y sigue funcionando bien, entonces no lo movi
+                            */
+                            {
+                                if (cant > 0 || (prio >= 0 && prio <= 3))
+                                {
+                                    inventario.AgregarSuministro(nuevo, cant, prio);
+                                }
+                                else
+                                {
+                                    inventario.AgregarSuministro(nuevo);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Elemento invalido, no se agrego nada");
+                            }
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            throw new Exception("Prioridad invalida, no se agrego el elemento");
+                        }
                     }
                     else
                     {
-                        inventario.AgregarSuministro(nuevo);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        throw new Exception("Cantidad invalida, no se agrego el elemento");
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Elemento invalido, no se agrego nada");
+                catch (Exception ex)
+                { 
+                    Console.WriteLine(ex.Message); 
                 }
                     break;
             case 2:
@@ -80,15 +117,15 @@ try
 
     }
 }
-catch(FormatException ex)
+catch (FormatException ex)
 {
     Console.WriteLine(ex.Message);
 }
-
 catch (Exception ex)
 {
     Console.WriteLine(ex.Message);
 }
+
 
 finally
 {
@@ -161,20 +198,27 @@ public class Inventario
 
     public void Mostrar_Suministros()
     {
-       if ( suministros != null)
+        try 
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Inventario de suministros: ");
-            foreach (Suministro suministro in suministros)
-            {
-                suministro.MostrarInfo();
-            }
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Inventario de suministros: ");
+                    if (suministros[0] != null)
+                    {
+                        foreach (Suministro suministro in suministros)
+                        {
+                            suministro.MostrarInfo();
+                        }
+                    }
+                    else
+                    {
+                Console.ForegroundColor = ConsoleColor.White;
+                throw new Exception("El inventario esta vacio");
+                    }
         }
-        else
+        catch (Exception ex) 
         {
-            throw new Exception("El arreglo esta vacio");
+            Console.WriteLine(ex.Message);
         }
-
     }
     public void BuscarSuministro(string nombre)
     {
