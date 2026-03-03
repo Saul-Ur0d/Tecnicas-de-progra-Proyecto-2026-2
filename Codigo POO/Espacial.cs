@@ -30,11 +30,10 @@ try
                     string nuevo = Console.ReadLine() ?? "";
 
                     /* 
-                    No me gustaba que el codigo terminara incluso si el catch evitaba que le lanzara
-                    excepcion de formato al usuario, y recorde que en la pagina de learn c# in y minutes
+                    Recorde que en la pagina de learn c# in y minutes
                     habia visto un comando booleano para ver si se lograba convertir a entero, investigue
                     un poco mas y decidi incluir el tryparse al codigo, se ve un poco sobrecargado de ifs
-                    y aparte tuve que ponerle otro try pero funciona :D
+                    pero funciona :D
                     */
 
                     Console.WriteLine("Cuantos deseas agregar?");
@@ -116,10 +115,6 @@ try
         }
 
     }
-}
-catch (FormatException ex)
-{
-    Console.WriteLine(ex.Message);
 }
 catch (Exception ex)
 {
