@@ -13,11 +13,13 @@
     <Compile Remove="Auto.cs" />
     <Compile Remove="Banco.cs" />
     <Compile Remove="Calculadora.cs" />
+    <Compile Remove="Casteos.cs" />
     <Compile Remove="CodigoPersona.cs" />
     <Compile Remove="CodigoRectangulo.cs" />
     <Compile Remove="Dispositivo.cs" />
     <Compile Remove="Espacial.cs" />
     <Compile Remove="Excepciones.cs" />
+    <Compile Remove="Interfaz.cs" />
     <Compile Remove="Juego.cs" />
     <Compile Remove="Lista de personas.cs" />
     <Compile Remove="ObjetoRectangulo.cs" />
@@ -29,11 +31,13 @@
     <None Include="Auto.cs" />
     <None Include="Banco.cs" />
     <None Include="Calculadora.cs" />
+    <None Include="Casteos.cs" />
     <None Include="CodigoPersona.cs" />
     <None Include="CodigoRectangulo.cs" />
     <None Include="Dispositivo.cs" />
     <None Include="Espacial.cs" />
     <None Include="Excepciones.cs" />
+    <None Include="Interfaz.cs" />
     <None Include="Lista de personas.cs" />
     <None Include="ObjetoRectangulo.cs" />
     <None Include="Persona.cs" />
