@@ -23,6 +23,7 @@
     <Compile Remove="Juego.cs" />
     <Compile Remove="Lista de personas.cs" />
     <Compile Remove="ObjetoRectangulo.cs" />
+    <Compile Remove="Pagos.cs" />
     <Compile Remove="Persona.cs" />
   </ItemGroup>
 
@@ -40,6 +41,7 @@
     <None Include="Interfaz.cs" />
     <None Include="Lista de personas.cs" />
     <None Include="ObjetoRectangulo.cs" />
+    <None Include="Pagos.cs" />
     <None Include="Persona.cs" />
   </ItemGroup>
 
