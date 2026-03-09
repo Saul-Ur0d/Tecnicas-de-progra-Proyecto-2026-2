@@ -6,63 +6,43 @@ Ventilador venti = new Ventilador();
 Altavoz bocina = new Altavoz();
 
 IOT.Add(lampara);
-IOT.Add(bocina);
 IOT.Add(venti);
+IOT.Add(bocina);
 
-bool continuar = true;
-do
+foreach (IDispositivoInteligente aparato in IOT)
 {
-    Console.WriteLine("Que deseas hacer? ");
-    Console.WriteLine("1- Encender todo ");
-    Console.WriteLine("2- Apagar todo ");
-    Console.WriteLine("3- Ajustar brillo de la lampara ");
-    Console.WriteLine("4- Ajustar velocidad del ventilador ");
-    Console.WriteLine("5- Poner musica ");
-    Console.WriteLine("6- Quitar musica ");
-    Console.WriteLine("7- Terminar programa ");
+    aparato.Encenderse();
+}
 
-    string decision = Console.ReadLine() ?? "";
-    if(int.TryParse(decision, out int Des))
-    {
-        switch (Des)
-        {
-            case 1:
-                foreach(IDispositivoInteligente aparato in IOT)
-                {
-                    aparato.Encenderse()
-                }
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                continuar = false;
-                break;
-            default:
-                Console.WriteLine("Ingresa un numero valido");
-                break;
-        }
-    }
+foreach (IDispositivoInteligente aparato in IOT)
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    aparato.Mostrar_Estado();
+    Console.ForegroundColor = ConsoleColor.White;
+}
 
+lampara.Ajustar_Brillo(14);
+venti.Ajustar_Velocidad(22);
+bocina.Reproducir_Musica();
 
+foreach (IDispositivoInteligente aparato in IOT)
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    aparato.Mostrar_Estado();
+    Console.ForegroundColor = ConsoleColor.White;
+}
 
+foreach (IDispositivoInteligente aparato in IOT)
+{
+    aparato.Apagarse();
+}
 
-} while (continuar);
-
-
-
-
-
-
-
-
+foreach (IDispositivoInteligente aparato in IOT)
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    aparato.Mostrar_Estado();
+    Console.ForegroundColor = ConsoleColor.White;
+}
 
 
 
@@ -87,10 +67,12 @@ public class Lampara : IDispositivoInteligente
 
     public void Encenderse()
     {
+        Console.WriteLine("Lampara se ha encendido");
         Estado = true;
     }
     public void Apagarse()
     {
+        Console.WriteLine("Lampara se ha apagado");
         Estado = false;
     }
     public void Mostrar_Estado()
@@ -126,17 +108,19 @@ public class Ventilador : IDispositivoInteligente
 
     public void Encenderse()
     {
+        Console.WriteLine("Ventilador se ha encendido");
         Estado = true;
     }
     public void Apagarse()
     {
+        Console.WriteLine("Ventilador se ha apagado");
         Estado = false;
     }
     public void Mostrar_Estado()
     {
         if (Estado)
         {
-            Console.WriteLine("Ventilador se encuentra encendido");
+            Console.WriteLine($"Ventilador se encuentra encendido soplando con velocidad de {Velocidad}");
         }
         else
         {
@@ -147,6 +131,7 @@ public class Ventilador : IDispositivoInteligente
     public void Ajustar_Velocidad(int ajuste)
     {
         Velocidad = Math.Abs(ajuste);
+        Console.WriteLine($"Se ha ajustado la velocidad a {Velocidad}");
     }
 }
 public class Altavoz : IDispositivoInteligente
@@ -161,10 +146,12 @@ public class Altavoz : IDispositivoInteligente
 
     public void Encenderse()
     {
+        Console.WriteLine("Altavoz se ha encendido");
         Estado = true;
     }
     public void Apagarse()
     {
+        Console.WriteLine("Altavoz se ha apagado");
         Estado = false;
     }
     public void Mostrar_Estado()
@@ -185,6 +172,7 @@ public class Altavoz : IDispositivoInteligente
     }
     public void Reproducir_Musica()
     {
+        Console.WriteLine("Se inicio a reproducir musica");
         Musica = true;
     }
 }

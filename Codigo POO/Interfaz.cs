@@ -23,8 +23,9 @@
 
 ////Con interfaces
 
-//IVolar pajaro = new PalomaI();
+IVolar pajaro = new PalomaI();
 //IAnimal otropaja = new PerroI();
+pajaro.Migajear();
 
 //Dragon dragon = new Dragon();
 //dragon.Hacer_Sonido();
@@ -149,6 +150,10 @@ public class PalomaI : IAnimal, IVolar
     public void Volar()
     {
         Console.WriteLine("Paloma vuela");
+    }
+    public void Migajear()
+    {
+        Console.WriteLine("Comiendo migajas del piso");
     }
 }
 public class ColibriI : IAnimal, IVolar
