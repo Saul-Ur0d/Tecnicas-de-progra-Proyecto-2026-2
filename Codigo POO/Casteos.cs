@@ -41,8 +41,15 @@ Animal mianimal = new Perro();
 
 Animal animal = new Animal();
 Perro perro = (Perro)animal;
+Perro perroanimal = animal as Perro
+
 perro.Ladrar();
 
+if (animal is Perro)
+{
+    Console.WriteLine("Es un perro");
+}
 
-
-
+object obj = "cadena";
+string text0 = obj as string;
+Console.WriteLine(text0);

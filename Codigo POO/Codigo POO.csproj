@@ -13,6 +13,7 @@
     <Compile Remove="Auto.cs" />
     <Compile Remove="Banco.cs" />
     <Compile Remove="Calculadora.cs" />
+    <Compile Remove="Casa Inteligente.cs" />
     <Compile Remove="Casteos.cs" />
     <Compile Remove="CodigoPersona.cs" />
     <Compile Remove="CodigoRectangulo.cs" />
@@ -32,6 +33,7 @@
     <None Include="Auto.cs" />
     <None Include="Banco.cs" />
     <None Include="Calculadora.cs" />
+    <None Include="Casa Inteligente.cs" />
     <None Include="Casteos.cs" />
     <None Include="CodigoPersona.cs" />
     <None Include="CodigoRectangulo.cs" />
