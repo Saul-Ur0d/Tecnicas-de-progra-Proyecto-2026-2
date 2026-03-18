@@ -22,6 +22,7 @@
     <Compile Remove="Excepciones.cs" />
     <Compile Remove="Interfaz.cs" />
     <Compile Remove="Juego.cs" />
+    <Compile Remove="Libros.cs" />
     <Compile Remove="Lista de personas.cs" />
     <Compile Remove="ObjetoRectangulo.cs" />
     <Compile Remove="Pagos.cs" />
@@ -41,6 +42,7 @@
     <None Include="Espacial.cs" />
     <None Include="Excepciones.cs" />
     <None Include="Interfaz.cs" />
+    <None Include="Libros.cs" />
     <None Include="Lista de personas.cs" />
     <None Include="ObjetoRectangulo.cs" />
     <None Include="Pagos.cs" />

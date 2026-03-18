@@ -3,7 +3,7 @@
 Auto auto1 = new Auto();
 auto1.Marca = "Honda";
 auto1.Modelo = "Civic";
-auto1.VelocidadActual = 20.5f
+auto1.VelocidadActual = 20.5f;
 Console.WriteLine($"La marca del auto es: {auto1.Marca}");
 auto1.Acelerar(10.0f);
 Console.WriteLine($"La velocidad es: {auto1.VelocidadActual}");
@@ -38,7 +38,7 @@ else if (autoH == moto)
 public class Vehiculo
 {
     //Atributos
-    protected string marca;
+    private string marca;
     protected string modelo;
     protected float velocidadActual;
 
