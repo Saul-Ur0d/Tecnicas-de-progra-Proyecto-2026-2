@@ -19,7 +19,9 @@
     <Compile Remove="CodigoRectangulo.cs" />
     <Compile Remove="Dispositivo.cs" />
     <Compile Remove="Espacial.cs" />
+    <Compile Remove="Examen.cs" />
     <Compile Remove="Excepciones.cs" />
+    <Compile Remove="Instrucciones de nivel superior examen.cs" />
     <Compile Remove="Interfaz.cs" />
     <Compile Remove="Juego.cs" />
     <Compile Remove="Libros.cs" />
@@ -40,7 +42,9 @@
     <None Include="CodigoRectangulo.cs" />
     <None Include="Dispositivo.cs" />
     <None Include="Espacial.cs" />
+    <None Include="Examen.cs" />
     <None Include="Excepciones.cs" />
+    <None Include="Instrucciones de nivel superior examen.cs" />
     <None Include="Interfaz.cs" />
     <None Include="Libros.cs" />
     <None Include="Lista de personas.cs" />
@@ -51,6 +55,12 @@
 
   <ItemGroup>
     <Page Include="Juego.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BibliotecaDeLibros">
+      <HintPath>..\BibliotecaDeLibros\bin\Debug\net8.0\BibliotecaDeLibros.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
