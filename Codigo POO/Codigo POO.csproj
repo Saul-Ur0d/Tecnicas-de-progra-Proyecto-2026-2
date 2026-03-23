@@ -61,6 +61,9 @@
     <Reference Include="BibliotecaDeLibros">
       <HintPath>..\BibliotecaDeLibros\bin\Debug\net8.0\BibliotecaDeLibros.dll</HintPath>
     </Reference>
+    <Reference Include="eXTENSIONES Biblioteca">
+      <HintPath>..\eXTENSIONES Biblioteca\bin\Debug\net8.0\eXTENSIONES Biblioteca.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

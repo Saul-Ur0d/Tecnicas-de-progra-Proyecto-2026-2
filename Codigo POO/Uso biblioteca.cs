@@ -1,5 +1,6 @@
 ﻿
 using BibliotecaDeLibros;
+using ExtensionDeBiblioteca;
 
 GestorLibros gestor = new GestorLibros();
 
@@ -13,3 +14,10 @@ gestor.AgregarLibro(new Libro("Juego de tronos", "George", 1996));
 
 Console.WriteLine("Libros actuales: ");
 gestor.MostrarLibros();
+
+//Metodo de extension
+
+Libro libro = gestor.BuscarLibrosPorAutor("George")[0];
+Console.WriteLine(libro.FormatoInformacion());
+Console.WriteLine($"Es libro antiguo: {libro.EsAntiguo}");
+
