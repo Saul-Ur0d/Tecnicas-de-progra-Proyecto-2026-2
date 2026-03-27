@@ -26,9 +26,11 @@
     <Compile Remove="Juego.cs" />
     <Compile Remove="Libros.cs" />
     <Compile Remove="Lista de personas.cs" />
+    <Compile Remove="Manejo de archivos.cs" />
     <Compile Remove="ObjetoRectangulo.cs" />
     <Compile Remove="Pagos.cs" />
     <Compile Remove="Persona.cs" />
+    <Compile Remove="Uso biblioteca.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,9 +50,11 @@
     <None Include="Interfaz.cs" />
     <None Include="Libros.cs" />
     <None Include="Lista de personas.cs" />
+    <None Include="Manejo de archivos.cs" />
     <None Include="ObjetoRectangulo.cs" />
     <None Include="Pagos.cs" />
     <None Include="Persona.cs" />
+    <None Include="Uso biblioteca.cs" />
   </ItemGroup>
 
   <ItemGroup>
