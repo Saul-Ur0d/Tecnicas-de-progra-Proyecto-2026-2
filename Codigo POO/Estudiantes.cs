@@ -1,4 +1,62 @@
-﻿
+﻿//Programa principal
+
+Estudiante estudiante = new Estudiante
+    {
+    Id = 1,
+    Nombre = "Pancho Villa",
+    Edad = 20,
+    Calificacion = 10.0
+    };
+
+Console.WriteLine(estudiante);
+Console.WriteLine(estudiante.ToString());
+
+//Configuracion inicial
+string archivoEstudiantes = "estudiantes.txt";
+
+GestorEstudiantes gestor = new GestorEstudiantes(archivoEstudiantes);
+
+//Crear una lista de estudiantes de ejemplo
+
+List <Estudiante> estudiantes = new List<Estudiante> 
+{
+    new Estudiante{ Id = 1, Nombre = "Diego Garcia", Edad = 22, Calificacion = 6.0},
+    new Estudiante{ Id = 2, Nombre = "Luis Romero", Edad = 21, Calificacion = 7.8},
+    new Estudiante{ Id = 3, Nombre = "Elias Vasquez", Edad = 20, Calificacion = 8.0},
+    new Estudiante{ Id = 4, Nombre = "Bruno Lopez", Edad = 20, Calificacion = 5.0},
+    new Estudiante{ Id = 5, Nombre = "Dario Pineda", Edad = 20, Calificacion = 8.1},
+
+};
+
+//Guardar estudiantes en archivo
+
+Console.WriteLine("Guardando estudiantes...");
+gestor.GuardarEstudiantes(estudiantes);
+
+//Leer todos los estudiantes
+
+Console.WriteLine("Leyendo estudiantes...");
+var estudiantesLeidos = gestor.LeerEstudiantes();
+foreach(var estudiant in estudiantesLeidos)
+{
+    Console.WriteLine(estudiant);
+}
+
+
+//Buscar estudiante por ID
+
+Console.WriteLine("Buscando estudiante con ID: 4");
+var estudianteEncontrado = gestor.BuscarEstudiantePorId(4);
+if(estudianteEncontrado != null)
+{
+    Console.WriteLine(estudianteEncontrado);
+}
+else
+{
+    Console.WriteLine("Estudiante no encontrado");
+}
+
+
 public class Estudiante
 {
     //Atributos
@@ -16,7 +74,7 @@ public class Estudiante
     //Metodos
     public override string ToString()
     {
-        return $"ID: {Id}, Nombre: {Nombre}, Edad: {Edad}, Calificacion: {Calificacion}";
+        return $"{Id},{Nombre},{Edad},{Calificacion}";
     }
 
 
@@ -69,21 +127,88 @@ public class GestorEstudiantes
         List<Estudiante> estudiantesLectura = new List<Estudiante>();
         try
         {
-            using (StreamReader reader = new StreamReader(fs))
+            if (File.Exists(rutaArchivo))
             {
-                string lineaLectura = reader.ReadLine();
-                Console.WriteLine("Lectura aleatoria en punto 13:" + lineaLectura);
+                using (StreamReader reader = new StreamReader(rutaArchivo))
+                {
+                    string lineaLectura;
 
+                    while((lineaLectura = reader.ReadLine()) != null)
+                    {
+                        //Dividimos la linea por las comas
+
+                        string[] datos = lineaLectura.Split(',');
+
+                        if(datos.Length == 4)
+                        {
+                            estudiantesLectura.Add(new Estudiante
+                            {
+                                Id = int.Parse(datos[0]),
+                                Nombre = datos [1],
+                                Edad = int.Parse(datos[2]),
+                                Calificacion = double.Parse(datos[3])
+                            });
+                        }
+                    }
+
+                }
+                Console.WriteLine("Estudiantes leidos correctamente");
+            }
+            else
+            {
+                Console.WriteLine("Archivo no encontrado en la ruta");
             }
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex.Message);
+        }
+        return estudiantesLectura;
+    }
 
+    //Buscar un estudiante por ID
+
+    public Estudiante BuscarEstudiantePorId(int id)
+    {
+        try
+        {
+            if (File.Exists(rutaArchivo))
+            {
+                using (StreamReader reader = new StreamReader(rutaArchivo))
+                {
+                    string lineaLectura;
+
+                    while ((lineaLectura = reader.ReadLine()) != null)
+                    {
+                        //Dividimos la linea por las comas
+
+                        string[] datos = lineaLectura.Split(',');
+
+                        if (datos.Length == 4 && int.Parse(datos[0]) == id)
+                        {
+                            return new Estudiante
+                            {
+                                Id = int.Parse(datos[0]),
+                                Nombre = datos[1],
+                                Edad = int.Parse(datos[2]),
+                                Calificacion = double.Parse(datos[3])
+                            };
+                        }
+                    }
+
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
 
+        return null; //si no se encuentra el estudiante
+    }
+
+
+
+
 }
-
-
-
-
 
