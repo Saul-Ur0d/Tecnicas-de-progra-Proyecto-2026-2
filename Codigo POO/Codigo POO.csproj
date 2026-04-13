@@ -15,10 +15,12 @@
     <Compile Remove="Calculadora.cs" />
     <Compile Remove="Casa Inteligente.cs" />
     <Compile Remove="Casteos.cs" />
+    <Compile Remove="Class1.cs" />
     <Compile Remove="CodigoPersona.cs" />
     <Compile Remove="CodigoRectangulo.cs" />
     <Compile Remove="Dispositivo.cs" />
     <Compile Remove="Espacial.cs" />
+    <Compile Remove="Estudiantes.cs" />
     <Compile Remove="Examen.cs" />
     <Compile Remove="Excepciones.cs" />
     <Compile Remove="Instrucciones de nivel superior examen.cs" />
@@ -40,10 +42,12 @@
     <None Include="Calculadora.cs" />
     <None Include="Casa Inteligente.cs" />
     <None Include="Casteos.cs" />
+    <None Include="Class1.cs" />
     <None Include="CodigoPersona.cs" />
     <None Include="CodigoRectangulo.cs" />
     <None Include="Dispositivo.cs" />
     <None Include="Espacial.cs" />
+    <None Include="Estudiantes.cs" />
     <None Include="Examen.cs" />
     <None Include="Excepciones.cs" />
     <None Include="Instrucciones de nivel superior examen.cs" />

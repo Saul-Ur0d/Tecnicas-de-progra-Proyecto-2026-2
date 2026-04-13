@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DIP.cs" />
+    <Compile Remove="ISP.cs" />
+    <Compile Remove="LSP.cs" />
+    <Compile Remove="LSP2.cs" />
+    <Compile Remove="OCP.cs" />
+    <Compile Remove="SRP.cs" />
+    <Compile Remove="Vacunas.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DIP.cs" />
+    <None Include="ISP.cs" />
+    <None Include="LSP.cs" />
+    <None Include="LSP2.cs" />
+    <None Include="SRP.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="OCP.cs" />
+    <Page Include="Vacunas.cs" />
+  </ItemGroup>
+
+</Project>

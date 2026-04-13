@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 		Persona.cs = Persona.cs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SRP", "SRP", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "solid", "..\solid\solid.csproj", "{52DC70A4-2737-4E98-8EA7-7B6DA1210A89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +24,16 @@ Global
 		{A39D0608-3CE9-41EB-81CD-F342393AA3F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A39D0608-3CE9-41EB-81CD-F342393AA3F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A39D0608-3CE9-41EB-81CD-F342393AA3F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52DC70A4-2737-4E98-8EA7-7B6DA1210A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DC70A4-2737-4E98-8EA7-7B6DA1210A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DC70A4-2737-4E98-8EA7-7B6DA1210A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DC70A4-2737-4E98-8EA7-7B6DA1210A89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52DC70A4-2737-4E98-8EA7-7B6DA1210A89} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5646EF48-D26D-4B3D-965E-EC1052D19E90}
