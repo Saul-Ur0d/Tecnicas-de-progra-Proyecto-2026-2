@@ -46,8 +46,8 @@ public class Mascota //Demasiadas responsabilidades en una clase, esta solo para
         return Edad * 50;
     }
 }
-public class EmailService
-{
+public class EmailService  //Ta bien
+{ 
     public void Enviar(string mensaje)
     {
         Console.WriteLine($"Enviando correo {mensaje}");
@@ -57,7 +57,7 @@ public class EmailService
 
 
 
-public class Notificador
+public class Notificador  //Tambien ta bien
 {
     private EmailService email = new EmailService();
     public void Notificar(Mascota mascota)
@@ -69,7 +69,7 @@ public class Notificador
 
 
 
-public class SistemaVeterinaria //Interfaz requerida para este y el especial
+public class SistemaVeterinaria //Se puede integrar una clase base de atributos y una interfaz para este y el especial
 {
     private List <Mascota> mascotas = new List<Mascota> ();
     Notificador notificador = new Notificador ();
