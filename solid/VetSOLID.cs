@@ -1,5 +1,17 @@
 ﻿
 
+// Instrucciones de nivel superior, aqui inverti el papel dejando como caso general el vet especial
+// y el sistema basico como el que solo funciona para perros, gatos y tortugas
+
+Console.WriteLine("Caso mascota comun");
+var sistema = new SistemaVeterinaria();
+sistema.AtenderMascota("Kiyo", "Perro", 2);
+
+Console.WriteLine("Caso mascota no contemplada");
+var sistema2 = new SistemaVetEspecial();
+sistema2.AtenderMascota("Jaime", "Iguana", 20);
+
+
 public class Mascota //Clase base para atributos
 {
     public string Nombre { get; set; }
@@ -29,7 +41,7 @@ public class MascotaDescomunal : Mascota, IPagoVacuna
 }
 public class Perro : Mascota, IPagoVacuna
 {
-    public Perro(string nombre, int edad)
+    public Perro(string nombre, string tipo, int edad) : base(nombre, tipo, edad)
     {
         Nombre = nombre;
         Tipo = "Perro";
@@ -43,7 +55,7 @@ public class Perro : Mascota, IPagoVacuna
 
 public class Gato : Mascota, IPagoVacuna
 {
-    public Gato(string nombre, int edad)
+    public Gato(string nombre, string tipo ,int edad) : base(nombre, tipo, edad)
     {
         Nombre = nombre;
         Tipo = "Gato";
@@ -56,7 +68,7 @@ public class Gato : Mascota, IPagoVacuna
 }
 public class Tortuga : Mascota, IPagoVacuna
 {
-    public Tortuga(string nombre, int edad)
+    public Tortuga(string nombre, string tipo, int edad) : base(nombre, tipo, edad)
     {
         Nombre = nombre;
         Tipo = "Tortuga";
@@ -94,8 +106,7 @@ public class Noti //Clase para mantener una sola responsabilidd
 
 public class Notificador : Noti
 {
-    //Por liskov aqui deberia poder ponerse la misma instancia de mascota en ambos parametros
-    public void Notificar(IPagoVacuna mascota, Mascota mas) { email.Enviar($"Mascota info : {mas.Nombre}| $ {mascota.CalcularVacuna}"); }
+    public void Notificar(IPagoVacuna mascota, Mascota mas) { email.Enviar($"Mascota info : {mas.Nombre}| precio de la vacuna: $ {mascota.CalcularVacuna()}"); }
 }
 
 
@@ -114,7 +125,7 @@ public class ClinicaVet
 
 public class SistemaVeterinaria : ClinicaVet, CuidadoAnimal
 {
-    public void AtenderMascota(string nombre, string tipo, int edad)
+    public virtual void AtenderMascota(string nombre, string tipo, int edad)
     {
         var mascota = new Mascota(nombre, tipo, edad);
         IPagoVacuna mascotaP = null;
@@ -125,15 +136,15 @@ public class SistemaVeterinaria : ClinicaVet, CuidadoAnimal
         }
         if(mascota.Tipo == "Perro")
         {
-            mascotaP = new Perro(nombre, edad);
+            mascotaP = new Perro(nombre, tipo, edad);
         }
         if (mascota.Tipo == "Gato")
         {
-            mascotaP = new Gato(nombre, edad);
+            mascotaP = new Gato(nombre, tipo, edad);
         }
         if (mascota.Tipo == "Tortuga")
         {
-            mascotaP = new Tortuga(nombre, edad);
+            mascotaP = new Tortuga(nombre, tipo, edad);
         }
 
         mascotas.Add(mascota);
@@ -143,12 +154,12 @@ public class SistemaVeterinaria : ClinicaVet, CuidadoAnimal
 
         foreach (var m in mascotas)
         {
-            Console.WriteLine($"{m.Nombre}- {m.Tipo}- {m.Edad}");
+            Console.WriteLine($"{m.Nombre}- {m.Tipo}- {m.Edad} años");
         }
 
     }
 }
-public class SistemaVetEspecial : ClinicaVet, CuidadoAnimal
+public class SistemaVetEspecial : SistemaVeterinaria
 {
     public override void AtenderMascota(string nombre, string tipo, int edad)
     {
