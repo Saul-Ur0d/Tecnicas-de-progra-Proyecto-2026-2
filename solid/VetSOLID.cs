@@ -1,10 +1,5 @@
 ﻿
 
-
-
-
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 public class Mascota //Clase base para atributos
 {
     public string Nombre { get; set; }
@@ -19,6 +14,60 @@ public class Mascota //Clase base para atributos
     }
 }
 
+public interface IPagoVacuna
+{
+    public decimal CalcularVacuna();
+}
+
+public class MascotaDescomunal : Mascota, IPagoVacuna
+{
+    public MascotaDescomunal(string nombre, string tipo, int edad) : base(nombre, tipo, edad) { }
+    public decimal CalcularVacuna()
+    {
+        return Edad*70; 
+    }
+}
+public class Perro : Mascota, IPagoVacuna
+{
+    public Perro(string nombre, int edad)
+    {
+        Nombre = nombre;
+        Tipo = "Perro";
+        Edad = edad;
+    }
+    public decimal CalcularVacuna()
+    {
+        return 200m; 
+    }
+}
+
+public class Gato : Mascota, IPagoVacuna
+{
+    public Gato(string nombre, int edad)
+    {
+        Nombre = nombre;
+        Tipo = "Gato";
+        Edad = edad;
+    }
+    public decimal CalcularVacuna()
+    {
+        return 180m; 
+    }
+}
+public class Tortuga : Mascota, IPagoVacuna
+{
+    public Tortuga(string nombre, int edad)
+    {
+        Nombre = nombre;
+        Tipo = "Tortuga";
+        Edad = edad;
+    }
+    public decimal CalcularVacuna()
+    {
+        return 400m; 
+    }
+}
+
 public class Verificador
 {
     public bool Verificar(Mascota mascota)
@@ -27,16 +76,7 @@ public class Verificador
     }
 }
 
-public class PrecioVacuna
-{
-    public decimal CalcularVacuna(Mascota mascota)
-    {
-        if (mascota.Tipo.StartsWith("P")) return 200;
-        if (mascota.Tipo.StartsWith("G")) return 180;
-        if (mascota.Tipo.Contains("tuga")) return 400;
-        return mascota.Edad * 50; 
-    }
-}
+
 
 public class EmailService
 {
@@ -54,12 +94,13 @@ public class Noti //Clase para mantener una sola responsabilidd
 
 public class Notificador : Noti
 {
-    public void Notificar(Mascota mascota, PrecioVacuna costo) { email.Enviar($"Mascota info : {mascota.Nombre}| $ {costo.CalcularVacuna(mascota)}"); }
+    //Por liskov aqui deberia poder ponerse la misma instancia de mascota en ambos parametros
+    public void Notificar(IPagoVacuna mascota, Mascota mas) { email.Enviar($"Mascota info : {mas.Nombre}| $ {mascota.CalcularVacuna}"); }
 }
 
 
 
-public interface CuidadoAnimal //Interfaz para poder usar liskov
+public interface CuidadoAnimal //Interfaz para clinicas veterinarias
 {
     public void AtenderMascota(string nombre, string tipo, int edad);
 }
@@ -68,7 +109,7 @@ public class ClinicaVet
     protected List<Mascota> mascotas = new List<Mascota>();
     protected Notificador notificador = new Notificador();
     protected Verificador verificador = new Verificador();
-    protected PrecioVacuna costo = new PrecioVacuna();
+    protected List <IPagoVacuna> pagoVacunas = new List<IPagoVacuna>();
 }
 
 public class SistemaVeterinaria : ClinicaVet, CuidadoAnimal
@@ -76,22 +117,54 @@ public class SistemaVeterinaria : ClinicaVet, CuidadoAnimal
     public void AtenderMascota(string nombre, string tipo, int edad)
     {
         var mascota = new Mascota(nombre, tipo, edad);
+        IPagoVacuna mascotaP = null;
+        if (!verificador.Verificar(mascota) && (mascota.Tipo != "Perro" && mascota.Tipo != "Gato" && mascota.Tipo != "Tortuga"))
+        {
+            Console.WriteLine("Mascota no se puede registrar");
+            return;
+        }
+        if(mascota.Tipo == "Perro")
+        {
+            mascotaP = new Perro(nombre, edad);
+        }
+        if (mascota.Tipo == "Gato")
+        {
+            mascotaP = new Gato(nombre, edad);
+        }
+        if (mascota.Tipo == "Tortuga")
+        {
+            mascotaP = new Tortuga(nombre, edad);
+        }
+
+        mascotas.Add(mascota);
+        notificador.Notificar(mascotaP, mascota);
+
+        Console.WriteLine("Resumen:");
+
+        foreach (var m in mascotas)
+        {
+            Console.WriteLine($"{m.Nombre}- {m.Tipo}- {m.Edad}");
+        }
+
+    }
+}
+public class SistemaVetEspecial : ClinicaVet, CuidadoAnimal
+{
+    public override void AtenderMascota(string nombre, string tipo, int edad)
+    {
+        var mascota = new MascotaDescomunal(nombre, tipo, edad);
         if (!verificador.Verificar(mascota))
         {
             Console.WriteLine("Mascota no se puede registrar");
             return;
         }
         mascotas.Add(mascota);
-        decimal costo = mascota.CalcularVacuna();
-        notificador.Notificar(mascota);
-
+        notificador.Notificar(mascota, mascota);
         Console.WriteLine("Resumen:");
-
         foreach (var m in mascotas)
         {
-            Console.WriteLine($"{m.Nombre}- {m.Tipo}");
+            Console.WriteLine($"{m.Nombre}- {m.Tipo}- {m.Edad}");
         }
-
     }
 }
 

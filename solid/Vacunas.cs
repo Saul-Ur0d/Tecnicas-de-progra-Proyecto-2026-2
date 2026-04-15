@@ -21,7 +21,7 @@ sistema4.AtenderMascota("Bolillo", "Cocodrilo", 3);
 
 //Clases dominio
 
-public class Mascota //Demasiadas responsabilidades en una clase, esta solo para atributos
+public class Mascota //Demasiadas responsabilidades en una clase, esta solo para atributos y constructor
 {
     public string Nombre { get; set; }
     public string Tipo { get; set; }
@@ -38,7 +38,7 @@ public class Mascota //Demasiadas responsabilidades en una clase, esta solo para
         return !string.IsNullOrEmpty(Nombre) && Edad > 0;
     }
 
-    public decimal CalcularVacuna() //Aqui se puede aplicar interfaz para cada tipo distinto de prestamo, dejando cada uno con una responsabilidad
+    public decimal CalcularVacuna() //Aqui se puede aplicar OCP para cada tipo distinto de prestamo, dejando cada uno con una responsabilidad
     {
         if (Tipo.StartsWith("P")) return 200;
         if (Tipo.StartsWith("G")) return 180;
