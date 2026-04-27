@@ -15,6 +15,7 @@
     <Compile Remove="OCP.cs" />
     <Compile Remove="SRP.cs" />
     <Compile Remove="Vacunas.cs" />
+    <Compile Remove="VetSOLID.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,7 @@
     <None Include="LSP.cs" />
     <None Include="LSP2.cs" />
     <None Include="SRP.cs" />
+    <None Include="VetSOLID.cs" />
   </ItemGroup>
 
   <ItemGroup>
