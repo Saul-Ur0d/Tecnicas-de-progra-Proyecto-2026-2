@@ -1,7 +1,7 @@
 ﻿
 //Programa principal
 
-Festival festival = new Festival("KesmesFI");
+Festival festival = new Festival("KermesFI");
 Console.WriteLine($"Bienbenidos al festival {festival.Nombre}");
 //Banda
 
@@ -49,10 +49,60 @@ festival.ResumenCartel();
 Banda MJ = new Banda("Michael Jackson", "UE", new TimeSpan(20, 0, 0), 2);
 MJ.CargaCancion(0, new Cancion("Thriller", 5, "Pop"));
 MJ.CargaCancion(1, new Cancion("Beat it", 4, "Pop"));
-Console.WriteLine($"Cambio de ultimo minuto {MJ.Nombre} confirma de ultima hora");
+Console.WriteLine($"Cambio de ultimo minuto {MJ.Nombre} confirma de ultima hora despues de BTS");
+
+//Nodo al que pertenece BTS
+
+LinkedListNode<Banda> nodoBTS = festival.OrdenShow.Find(bts);
 
 //Insertar al orden 
 
+festival.InsertarBandaDespuesDe(MJ, nodoBTS);
+
+//Cancelo la banda
+
+festival.CancelarBanda(bts);
+
+//Fila de ingreso
+
+Console.WriteLine("Asistentes en la fila de ingreso: ");
+festival.FilaIngreso.Enqueue(new Asistente("Juan", 1001, new TimeSpan(17, 0, 0)));
+festival.FilaIngreso.Enqueue(new Asistente("Carlos", 1002, new TimeSpan(17, 30, 0)));
+festival.FilaIngreso.Enqueue(new Asistente("Saul", 1003, new TimeSpan(20, 30, 0)));
+festival.FilaIngreso.Enqueue(new Asistente("Bruno", 1004, new TimeSpan(21, 0, 0)));
+festival.FilaIngreso.Enqueue(new Asistente("Daniela", 1005, new TimeSpan(16, 0, 0)));
+
+//Admitir a todos en orden de llegada
+
+Console.WriteLine("Admitiendo al festival: ");
+while(festival.FilaIngreso.Count > 0)
+{
+    Asistente ingreso = festival.AdmitirSiguiente();
+    Console.WriteLine($"Ingresa: {ingreso.Nombre} | {ingreso.HoraLlegada}");
+}
+
+//Simulacion de presentaciones en escenario
+
+Console.WriteLine("Presentaciones en escenario:");
+foreach (Banda b in festival.OrdenShow.SkipLast(2))
+{
+    festival.RegistrarPresentacion(b);
+}
+
+//Historial de presentaciones
+
+Console.WriteLine("Historial del escenario: ");
+Stack<Banda> copiaHistorial = new Stack<Banda>(festival.HistorialEscenario);
+int turno = 1;
+while(copiaHistorial.Count > 0)
+{
+    Console.WriteLine($" {turno++} | {copiaHistorial.Pop().Nombre}");
+}
+
+//Resumen
+
+festival.ResumenCartel();
+Console.WriteLine("Gracias por asistir al festival");
 
 
 
@@ -186,7 +236,10 @@ public class Festival
 
     public void InsertarBandaDespuesDe(Banda nueva, LinkedListNode<Banda> despuesDe)
     {
-        OrdenShow.Remove(nueva);
+        if (OrdenShow.Contains(nueva))
+        {
+            OrdenShow.Remove(nueva);
+        }
         OrdenShow.AddAfter(despuesDe, nueva);
         Console.WriteLine($" [] {nueva.Nombre} reubicada en el orden del show");
     }
@@ -194,7 +247,7 @@ public class Festival
     public void RegistrarPresentacion(Banda banda)
     {
         HistorialEscenario.Push(banda);
-        Console.WriteLine($"{banda.ToString} se ha preentado y registrado correctamente");
+        Console.WriteLine($"{banda.ToString()} se ha presentado y registrado correctamente");
     }
 
     public Asistente AdmitirSiguiente()
